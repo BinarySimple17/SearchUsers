@@ -1,0 +1,2 @@
+https://futurestud.io/blog/retrofit-synchronous-and-asynchronous-requests
+http://randomdotnext.com/retrofit-rxjava/
