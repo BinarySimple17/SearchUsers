@@ -1,26 +1,18 @@
 package ru.binarysimple.searchusers;
 
 
-import okhttp3.OkHttpClient;
-
-
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit.RestAdapter;
 
 public class ServiceGenerator {
 
-    public static final String API_BASE_URL = "https://api.github.com/";
+    public static final String API_BASE_URL = "https://api.github.com";
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    public static <T> T createRetrofitService(final Class<T> service) {
+        final RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(API_BASE_URL)
+                .build();
 
-    private static Retrofit.Builder builder =
-            new Retrofit.Builder()
-                    .baseUrl(API_BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create());
-
-    public static <S> S createService(Class<S> serviceClass) {
-        Retrofit retrofit = builder.client(httpClient.build()).build();
-        return retrofit.create(serviceClass);
+        return restAdapter.create(service);
     }
 
 }
