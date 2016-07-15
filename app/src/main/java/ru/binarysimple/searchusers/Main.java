@@ -12,7 +12,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-//http://randomdotnext.com/retrofit-rxjava/
+
 
 public class Main extends AppCompatActivity {
     public final String TAG = "retro";
@@ -40,7 +40,10 @@ public class Main extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchUsers(etUserName.getText().toString());
+                if (!etUserName.getText().toString().equals("")) {
+                    adapter.clear();
+                    searchUsers(etUserName.getText().toString());
+                }
             }
         });
     }
@@ -66,6 +69,7 @@ public class Main extends AppCompatActivity {
                         System.out.println("onNext total_count = "+ userList.getTotal_count());
                         for (User user : userList.items) {
                             adapter.addData(user);
+                            System.out.println(user.getLogin());
                         }
                     }
                 });
